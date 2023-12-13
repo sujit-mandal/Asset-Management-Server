@@ -38,6 +38,7 @@ async function run() {
       .db("assetDB")
       .collection("employeeAssetRequests");
     const paymentColletion = client.db("assetDB").collection("payment");
+    const ticketColletion = client.db("assetDB").collection("ticket");
 
     // jwt related api
     app.post("/jwt", async (req, res) => {
@@ -125,6 +126,11 @@ async function run() {
     app.post("/payment-info", async (req, res) => {
       const paymentInfo = req.body;
       const result = await paymentColletion.insertOne(paymentInfo);
+      res.send(result);
+    });
+    app.post("/employee/ticket", async (req, res) => {
+      const ticket = req.body;
+      const result = await ticketColletion.insertOne(ticket);
       res.send(result);
     });
     //Get Api
